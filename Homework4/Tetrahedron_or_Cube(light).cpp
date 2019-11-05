@@ -294,7 +294,7 @@ int main(int argc, char* argv[])
 	cin >> a;
 
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	glutInitWindowPosition(200, 200);
 	glutInitWindowSize(WIDTH, HEIGHT);
 
