@@ -19,12 +19,12 @@ void Bresenham_line(GLint x_1, GLint y_1, GLint x_2, GLint y_2)
 	glClear(GL_COLOR_BUFFER_BIT);
 	int dx = abs(x_2 - x_1),
 		dy = abs(y_2 - y_1),
-		yy = 0;
+		symmetry = 0;
 	glPointSize(pointsize);
 
 	if (dx < dy)//直线与 x 轴的夹角大于 45 度时需要做对称
 	{
-		yy = 1;
+		symmetry = 1;
 		swap(x_1, y_1);
 		swap(x_2, y_2);
 		swap(dx, dy);
@@ -34,23 +34,23 @@ void Bresenham_line(GLint x_1, GLint y_1, GLint x_2, GLint y_2)
 		iy = (y_2 - y_1) > 0 ? 1 : -1,
 		cx = x_1,
 		cy = y_1,
-		nextdy = dy * 2,
-		nextdydx = (dy - dx) * 2,
-		d = dy * 2 - dx;
+		nextl0 = dy * 2,
+		nexts0 = (dy - dx) * 2,
+		p = dy * 2 - dx;     //初始的p的值
 
 	//直线与 x 轴的夹角大于 45 度的情况（需要做对称）
-	if (yy == 1)
+	if (symmetry == 1)
 	{
 		while (cx != x_2)
 		{
-			if (d < 0)
+			if (p < 0)
 			{
-				d += nextdy;
+				p += nexts0;
 			}
 			else
 			{
 				cy += iy;
-				d += nextdydx;
+				p += nextl0;
 			}
 			glVertex2i(cy, cx);//调换x,y的顺序再对称回来
 			cx += ix;
@@ -61,12 +61,12 @@ void Bresenham_line(GLint x_1, GLint y_1, GLint x_2, GLint y_2)
 	else
 	{
 		while (cx != x_2) {
-			if (d < 0) {
-				d += nextdy;
+			if (p < 0) {
+				p += nextl0;
 			}
 			else {
 				cy += iy;
-				d += nextdydx;
+				p += nexts0;
 			}
 			glVertex2i(cx, cy);
 			cx += ix;

@@ -25,8 +25,7 @@ void Bresenham_circle(GLint x_0, GLint y_0, GLint R)
 		glVertex2i(x_0 + cy, y_0 + cx);
         
         cx++;
-        if (d 
-			>= 0)
+        if (d >= 0)
         {
 			d = d + 2 * cx - 2 * cy + 5;
 			cy = cy - 1;
